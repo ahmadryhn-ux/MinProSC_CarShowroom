@@ -1,6 +1,8 @@
 $kind: http-request
-url: http://localhost:3000/api/cars/6b096ef7b7f2e19698795f67
+url: http://localhost:3000/api/cars?model=CX-5
 method: PUT
+queryParams:
+  model: CX-5
 body:
   type: json
   content: |-
