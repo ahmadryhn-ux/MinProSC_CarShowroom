@@ -1,0 +1,23 @@
+{
+  "info": {
+    "_postman_id": "cc48fe3b-8a62-4a7d-8ebd-6c61c99c229b",
+    "name": "Car Showroom Management API",
+    "description": "Collection CRUD inventaris mobil. Jalankan server dan MongoDB sebelum memakai collection.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:3000" },
+    { "key": "carId", "value": "" }
+  ],
+  "item": [
+    { "name": "Health check", "request": { "method": "GET", "url": "{{baseUrl}}/api/health" } },
+    { "name": "List cars", "request": { "method": "GET", "url": "{{baseUrl}}/api/cars" } },
+    { "name": "Search and filter cars", "request": { "method": "GET", "url": { "raw": "{{baseUrl}}/api/cars?search=toyota&brand=Toyota&minPrice=100000000&maxPrice=300000000", "host": ["{{baseUrl}}"], "path": ["api", "cars"], "query": [{ "key": "search", "value": "toyota" }, { "key": "brand", "value": "Toyota" }, { "key": "minPrice", "value": "100000000" }, { "key": "maxPrice", "value": "300000000" }] } } },
+    { "name": "Create car", "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["if (pm.response.code === 201) {", "  const response = pm.response.json();", "  pm.collectionVariables.set('carId', response.data._id);", "}"] } }], "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"brand\": \"Toyota\",\n  \"model\": \"Avanza\",\n  \"year\": 2024,\n  \"price\": 250000000,\n  \"color\": \"Silver\",\n  \"transmission\": \"Automatic\",\n  \"stock\": 3\n}", "options": { "raw": { "language": "json" } } }, "url": "{{baseUrl}}/api/cars" } },
+    { "name": "Get car by ID", "request": { "method": "GET", "url": "{{baseUrl}}/api/cars/{{carId}}" } },
+    { "name": "Replace car by ID", "request": { "method": "PUT", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"brand\": \"Toyota\",\n  \"model\": \"Avanza Veloz\",\n  \"year\": 2025,\n  \"price\": 275000000,\n  \"color\": \"Black\",\n  \"transmission\": \"Automatic\",\n  \"stock\": 2\n}", "options": { "raw": { "language": "json" } } }, "url": "{{baseUrl}}/api/cars/{{carId}}" } },
+    { "name": "Delete car by ID", "request": { "method": "DELETE", "url": "{{baseUrl}}/api/cars/{{carId}}" } },
+    { "name": "Invalid car ID (400)", "request": { "method": "GET", "url": "{{baseUrl}}/api/cars/invalid-id" } },
+    { "name": "Invalid car body (400)", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"brand\": \"Toyota\",\n  \"year\": \"not-a-year\"\n}", "options": { "raw": { "language": "json" } } }, "url": "{{baseUrl}}/api/cars" } }
+  ]
+}

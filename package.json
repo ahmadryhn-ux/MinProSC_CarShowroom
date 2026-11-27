@@ -1,0 +1,18 @@
+{
+  "name": "carshowroom_ahmad",
+  "version": "1.0.0",
+  "description": "REST API manajemen inventaris mobil dengan Express.js dan MongoDB",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "keywords": [],
+  "type": "module",
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "express": "^5.3.0",
+    "mongoose": "^8.9.5",
+    "nodemon": "^3.1.14"
+  }
+}
