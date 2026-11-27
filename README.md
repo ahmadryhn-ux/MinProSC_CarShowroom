@@ -87,4 +87,7 @@ Import `postman/CarShowroom.postman_collection.json` ke Postman, jalankan server
 
 ## Presentasi
 
-PDF presentasi final tersedia di `output/pdf/CarShowroom-Presentasi.pdf`. Isi NIM dan tautan repository sebelum mengumpulkan. Presentasi mencakup judul aplikasi, arsitektur, metode HTTP, dan kesimpulan.
+PDF presentasi final tersedia di `PPT_Car Showroom Management System.pdf`. Isi NIM dan tautan repository sebelum mengumpulkan. Presentasi mencakup judul aplikasi, arsitektur, metode HTTP, dan kesimpulan.
+
+
+**link Video Presentasi:** https://youtu.be/USS0jkexhlA?si=MkZCuDvyFgZdvrZn

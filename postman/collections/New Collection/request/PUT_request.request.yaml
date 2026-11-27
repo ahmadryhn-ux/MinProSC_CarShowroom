@@ -1,5 +1,5 @@
 $kind: http-request
-url: http://localhost:3000/api/cars?model=CX-5
+url: http://localhost:3000/api/cars/id
 method: PUT
 queryParams:
   model: CX-5
