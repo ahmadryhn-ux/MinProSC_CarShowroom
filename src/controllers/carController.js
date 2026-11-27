@@ -8,7 +8,7 @@ function parseNumberQuery(value, name) {
   if (value === undefined) return undefined;
   const parsed = Number(value);
   if (!Number.isFinite(parsed) || parsed < 0) {
-    const error = new Error(`${name} must be a non-negative number`);
+    const error = new Error(`${name} harus berupa angka nol atau lebih`);
     error.status = 400;
     throw error;
   }
@@ -30,7 +30,7 @@ export async function listCars(req, res, next) {
         .status(400)
         .json({
           success: false,
-          message: "year must be a valid year (1886 or later)",
+          message: "Tahun harus berupa bilangan bulat minimal 1886",
         });
     }
     if (
@@ -42,7 +42,7 @@ export async function listCars(req, res, next) {
         .status(400)
         .json({
           success: false,
-          message: "minPrice cannot be greater than maxPrice",
+          message: "Harga minimum tidak boleh melebihi harga maksimum",
         });
     }
 
@@ -76,11 +76,11 @@ export async function getCar(req, res, next) {
     if (!mongoose.isValidObjectId(req.params.id)) {
       return res
         .status(400)
-        .json({ success: false, message: "Invalid car ID" });
+        .json({ success: false, message: "ID mobil tidak valid" });
     }
     const car = await Car.findById(req.params.id);
     if (!car)
-      return res.status(404).json({ success: false, message: "Car not found" });
+      return res.status(404).json({ success: false, message: "Mobil tidak ditemukan" });
     res.status(200).json({ success: true, data: car });
   } catch (error) {
     next(error);
@@ -93,12 +93,12 @@ export async function createCar(req, res, next) {
     if (!req.body || typeof req.body !== "object" || Array.isArray(req.body)) {
       return res
         .status(400)
-        .json({ success: false, message: "Request body must be a car object" });
+        .json({ success: false, message: "Isi request harus berupa objek data mobil" });
     }
     const car = await Car.create(req.body);
     res
       .status(201)
-      .json({ success: true, message: "Car created successfully", data: car });
+      .json({ success: true, message: "Mobil berhasil ditambahkan", data: car });
   } catch (error) {
     next(error);
   }
@@ -109,12 +109,12 @@ export async function updateCar(req, res, next) {
     if (!mongoose.isValidObjectId(req.params.id)) {
       return res
         .status(400)
-        .json({ success: false, message: "Invalid car ID" });
+        .json({ success: false, message: "ID mobil tidak valid" });
     }
     if (!req.body || typeof req.body !== "object" || Array.isArray(req.body)) {
       return res
         .status(400)
-        .json({ success: false, message: "Request body must be a car object" });
+        .json({ success: false, message: "Isi request harus berupa objek data mobil" });
     }
     // Pemeriksaan kelengkapan field untuk operasi PUT.
     const requiredFields = [
@@ -132,18 +132,54 @@ export async function updateCar(req, res, next) {
     if (missingFields.length) {
       return res.status(400).json({
         success: false,
-        message: "PUT requires all car fields",
-        details: missingFields.map((field) => `${field} is required`),
+        message: "Semua field mobil wajib disertakan untuk PUT",
+        details: missingFields.map((field) => `${field} wajib diisi`),
       });
     }
     const car = await Car.findById(req.params.id);
     if (!car)
-      return res.status(404).json({ success: false, message: "Car not found" });
+      return res.status(404).json({ success: false, message: "Mobil tidak ditemukan" });
     for (const field of requiredFields) car[field] = req.body[field];
     await car.save();
     res
       .status(200)
-      .json({ success: true, message: "Car updated successfully", data: car });
+      .json({ success: true, message: "Data mobil berhasil diperbarui", data: car });
+  } catch (error) {
+    next(error);
+  }
+}
+
+// PATCH memperbarui hanya field yang dikirim dalam request body.
+export async function patchCar(req, res, next) {
+  try {
+    if (!mongoose.isValidObjectId(req.params.id)) {
+      return res
+        .status(400)
+        .json({ success: false, message: "ID mobil tidak valid" });
+    }
+    if (
+      !req.body ||
+      typeof req.body !== "object" ||
+      Array.isArray(req.body) ||
+      Object.keys(req.body).length === 0
+    ) {
+      return res.status(400).json({
+        success: false,
+        message: "Isi request harus berisi minimal satu field mobil",
+      });
+    }
+
+    const car = await Car.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+      runValidators: true,
+    });
+    if (!car)
+      return res.status(404).json({ success: false, message: "Mobil tidak ditemukan" });
+    res.status(200).json({
+      success: true,
+      message: "Sebagian data mobil berhasil diperbarui",
+      data: car,
+    });
   } catch (error) {
     next(error);
   }
@@ -155,15 +191,16 @@ export async function deleteCar(req, res, next) {
     if (!mongoose.isValidObjectId(req.params.id)) {
       return res
         .status(400)
-        .json({ success: false, message: "Invalid car ID" });
+        .json({ success: false, message: "ID mobil tidak valid" });
     }
     const car = await Car.findByIdAndDelete(req.params.id);
     if (!car)
-      return res.status(404).json({ success: false, message: "Car not found" });
+      return res.status(404).json({ success: false, message: "Mobil tidak ditemukan" });
     res
       .status(200)
-      .json({ success: true, message: "Car deleted successfully", data: car });
+      .json({ success: true, message: "Mobil berhasil dihapus", data: car });
   } catch (error) {
     next(error);
   }
 }
+

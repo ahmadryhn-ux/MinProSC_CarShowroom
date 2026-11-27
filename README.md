@@ -72,6 +72,7 @@ Semua endpoint memakai prefix `/api` dan mengembalikan JSON dengan format `{ "su
 | GET | `/api/cars/:id` | Detail mobil berdasarkan MongoDB ObjectId. |
 | POST | `/api/cars` | Menambahkan mobil. |
 | PUT | `/api/cars/:id` | Mengganti data mobil. Kirim seluruh field mobil. |
+| PATCH | `/api/cars/:id` | Mengubah hanya field yang dikirim. |
 | DELETE | `/api/cars/:id` | Menghapus mobil. |
 
 Filter daftar: `search` mencocokkan merek/model tanpa membedakan huruf besar-kecil; `brand` memfilter merek; `year`, `minPrice`, dan `maxPrice` memfilter tahun/harga.

@@ -5,9 +5,10 @@ export default async function connectDatabase() {
   const uri = process.env.MONGODB_URI;
   
   // Pemeriksaan konfigurasi URI database.
-  if (!uri) throw new Error("MONGODB_URI is required");
+  if (!uri) throw new Error("MONGODB_URI wajib diisi");
   
   // Menunggu koneksi database selesai.
   await mongoose.connect(uri);
-  console.log("Connected to MongoDB");
+  console.log("Berhasil terhubung ke MongoDB");
 }
+

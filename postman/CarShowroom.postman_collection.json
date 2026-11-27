@@ -80,6 +80,19 @@
       }
     },
     {
+      "name": "PATCH ubah harga mobil",
+      "request": {
+        "method": "PATCH",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"price\": 700000000\n}",
+          "options": { "raw": { "language": "json" } }
+        },
+        "url": "{{baseUrl}}/api/cars/{{carId}}"
+      }
+    },
+    {
       "name": "Delete car by ID",
       "request": { "method": "DELETE", "url": "{{baseUrl}}/api/cars/{{carId}}" }
     },

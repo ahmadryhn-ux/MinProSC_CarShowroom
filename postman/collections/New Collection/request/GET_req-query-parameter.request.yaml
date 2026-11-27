@@ -1,4 +1,4 @@
 $kind: http-request
-url: ""
+url: http://localhost:3000/api/cars?search=Mazda
 method: GET
 order: 7000

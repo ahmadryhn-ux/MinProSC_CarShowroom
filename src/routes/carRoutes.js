@@ -4,6 +4,7 @@ import {
   deleteCar,
   getCar,
   listCars,
+  patchCar,
   updateCar,
 } from "../controllers/carController.js";
 
@@ -12,6 +13,6 @@ const router = Router();
 // Route koleksi mobil: daftar dan tambah.
 router.route("/").get(listCars).post(createCar);
 // Route detail mobil berdasarkan ID: baca, ubah, dan hapus.
-router.route("/:id").get(getCar).put(updateCar).delete(deleteCar);
+router.route("/:id").get(getCar).put(updateCar).patch(patchCar).delete(deleteCar);
 
 export default router;
