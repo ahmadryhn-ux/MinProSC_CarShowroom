@@ -1,0 +1,23 @@
+$kind: http-request
+url: http://localhost:3000/api/cars
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \  \"brand\": \"Toyota\",\r
+
+    \  \"model\": \"Avanza\",\r
+
+    \  \"year\": 2024,\r
+
+    \  \"price\": 250000000,\r
+
+    \  \"color\": \"Silver\",\r
+
+    \  \"transmission\": \"Automatic\",\r
+
+    \  \"stock\": 3\r
+
+    }"
+order: 3000

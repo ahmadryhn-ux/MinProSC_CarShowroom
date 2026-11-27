@@ -1,0 +1,7 @@
+$kind: http-request
+url: http://localhost:3000/api/cars/6b096ef7b7f2e19698795f67
+method: PATCH
+body:
+  type: json
+  content: "{\r\n  \"price\": 10000\r\n}"
+order: 6000

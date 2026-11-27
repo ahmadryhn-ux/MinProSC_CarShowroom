@@ -1,0 +1,4 @@
+$kind: http-request
+url: http://localhost:3000/api/cars/6b096ef7b7f2e19698795f67
+method: DELETE
+order: 5000
