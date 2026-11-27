@@ -51,11 +51,11 @@ Contoh request body:
 
 ```json
 {
-  "brand": "Toyota",
-  "model": "Avanza",
-  "year": 2024,
-  "price": 250000000,
-  "color": "Silver",
+  "brand": "Mazda",
+  "model": "CX-5",
+  "year": 2025,
+  "price": 650000000,
+  "color": "Black",
   "transmission": "Automatic",
   "stock": 3
 }
@@ -76,7 +76,7 @@ Semua endpoint memakai prefix `/api` dan mengembalikan JSON dengan format `{ "su
 
 Filter daftar: `search` mencocokkan merek/model tanpa membedakan huruf besar-kecil; `brand` memfilter merek; `year`, `minPrice`, dan `maxPrice` memfilter tahun/harga.
 
-Contoh: `GET /api/cars?search=toyota&minPrice=100000000&maxPrice=300000000`
+Contoh: `GET /api/cars?search=Mazda&minPrice=500000000&maxPrice=800000000`
 
 ID dengan format salah menghasilkan `400`, data yang tidak ada menghasilkan `404`, data tidak valid menghasilkan `400`, dan error server menghasilkan `500` dengan pesan umum.
 
